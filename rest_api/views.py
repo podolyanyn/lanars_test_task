@@ -5,6 +5,7 @@ from rest_framework import viewsets
 from rest_framework import permissions
 from .serializers import UserSerializer, PortfolioSerializer, ImageSerializer, CommentSerializer
 from rest_framework import filters
+from .permissions import IsOwnerOrReadOnlyPortfolio, IsOwnerOrReadOnlyImage
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -13,7 +14,7 @@ class UserViewSet(viewsets.ModelViewSet):
     """
     queryset = User.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly] #, IsOwnerOrReadOnly]
 
 
 class PortfolioViewSet(viewsets.ModelViewSet):
@@ -22,7 +23,7 @@ class PortfolioViewSet(viewsets.ModelViewSet):
     """
     queryset = Portfolio.objects.all()
     serializer_class = PortfolioSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnlyPortfolio]
 
 
 class ImageViewSet(viewsets.ModelViewSet):
@@ -31,7 +32,7 @@ class ImageViewSet(viewsets.ModelViewSet):
     """
     queryset = Image.objects.all()
     serializer_class = ImageSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnlyImage]
     filter_backends = [filters.SearchFilter]
     search_fields = ['name', 'description']
 
