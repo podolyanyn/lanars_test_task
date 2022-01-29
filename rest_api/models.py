@@ -17,6 +17,9 @@ class Image(models.Model):
     description = models.TextField('Description')
     picture = models.ImageField('Picture', upload_to='')
 
+    def __str__(self):
+        return self.name
+
 
 class Comment(models.Model):
     image = models.ForeignKey(Image, on_delete=models.CASCADE, related_name='comments', verbose_name='Image')
