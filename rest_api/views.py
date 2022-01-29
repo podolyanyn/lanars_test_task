@@ -4,6 +4,7 @@ from .models import Portfolio, Image, Comment
 from rest_framework import viewsets
 from rest_framework import permissions
 from .serializers import UserSerializer, PortfolioSerializer, ImageSerializer, CommentSerializer
+from rest_framework import filters
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -31,6 +32,8 @@ class ImageViewSet(viewsets.ModelViewSet):
     queryset = Image.objects.all()
     serializer_class = ImageSerializer
     permission_classes = [permissions.IsAuthenticated]
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['name', 'description']
 
 
 class CommentViewSet(viewsets.ModelViewSet):

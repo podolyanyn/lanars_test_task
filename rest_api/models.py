@@ -7,6 +7,9 @@ class Portfolio(models.Model):
     name = models.CharField('Name', max_length=30)
     description = models.TextField('Description')
 
+    def __str__(self):
+        return self.name
+
 
 class Image(models.Model):
     portfolio = models.ForeignKey(Portfolio, on_delete=models.CASCADE, related_name='images', verbose_name='Portfolio')
