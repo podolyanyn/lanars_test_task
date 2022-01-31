@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.contrib.auth.models import User
 from .models import Portfolio, Image, Comment
 from rest_framework import viewsets
@@ -9,27 +8,18 @@ from .permissions import IsOwnerOrReadOnlyPortfolio, IsOwnerOrReadOnlyImage
 
 
 class UserViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows users to be viewed or edited.
-    """
     queryset = User.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly] #, IsOwnerOrReadOnly]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
 class PortfolioViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows ...
-    """
     queryset = Portfolio.objects.all()
     serializer_class = PortfolioSerializer
     permission_classes = [IsOwnerOrReadOnlyPortfolio]
 
 
 class ImageViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows ...
-    """
     queryset = Image.objects.all()
     serializer_class = ImageSerializer
     permission_classes = [IsOwnerOrReadOnlyImage]
@@ -38,9 +28,5 @@ class ImageViewSet(viewsets.ModelViewSet):
 
 
 class CommentViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows ...
-    """
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
-    #permission_classes = [permissions.IsAuthenticated]

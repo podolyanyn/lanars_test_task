@@ -25,3 +25,5 @@ class CommentSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Comment
         fields = ['url', 'image', 'text']
+
+
