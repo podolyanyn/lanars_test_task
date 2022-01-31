@@ -23,7 +23,7 @@ class PortfolioViewSet(viewsets.ModelViewSet):
     """
     queryset = Portfolio.objects.all()
     serializer_class = PortfolioSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnlyPortfolio]
+    permission_classes = [IsOwnerOrReadOnlyPortfolio]
 
 
 class ImageViewSet(viewsets.ModelViewSet):
@@ -32,7 +32,7 @@ class ImageViewSet(viewsets.ModelViewSet):
     """
     queryset = Image.objects.all()
     serializer_class = ImageSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnlyImage]
+    permission_classes = [IsOwnerOrReadOnlyImage]
     filter_backends = [filters.SearchFilter]
     search_fields = ['name', 'description']
 
